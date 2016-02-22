@@ -9,24 +9,21 @@
 
 #include <glm/glm.hpp>
 
-struct Transform : public Component<Transform> {
-        static const uint32_t MAX_COMPONENT_DATA {1024};
+struct Transform : public Component<Transform, 1024> {
         glm::vec3 origin {0.0f, 0.0f, 0.0f};
         glm::vec3 position {0.0f, 0.0f, 0.0f};
         glm::vec3 rotation {0.0f, 0.0f, 0.0f};
         Color color {0.0f, 0.0f, 0.0f, 0.0f};
 };
 
-struct Mesh : public Component<Mesh> {
-        static const uint32_t MAX_COMPONENT_DATA {1024};
+struct Mesh : public Component<Mesh, 1024> {
         VerticesIds vertices_ids {};
         TexcoordsIds texcoords_ids {};
         FacesIds faces_ids {};
         std::vector<TextureGL> textures {};
 };
 
-struct MeshGL : public Component<MeshGL> {
-        static const uint32_t MAX_COMPONENT_DATA {1024};
+struct MeshGL : public Component<MeshGL, 1024> {
         GLuint VAO {0};
         GLuint VBO_position {0};
         GLuint VBO_texcoord {0};
@@ -35,8 +32,7 @@ struct MeshGL : public Component<MeshGL> {
         std::vector<GLuint> indices {};
 };
 
-struct Skybox : public Component<Skybox> {
-        static const uint32_t MAX_COMPONENT_DATA {4};
+struct Skybox : public Component<Skybox, 4> {
         GLuint VAO {0};
         GLuint VBO_position {0};
         GLuint EBO {0};
@@ -45,17 +41,14 @@ struct Skybox : public Component<Skybox> {
         std::vector<GLuint> indices {};
 };
 
-struct Sprite2D : public Component<Sprite2D> {
-        static const uint32_t MAX_COMPONENT_DATA {1024};
+struct Sprite2D : public Component<Sprite2D, 1024> {
 };
 
-struct DynamicBody : public Component<DynamicBody> {
-        static const uint32_t MAX_COMPONENT_DATA {1024};
+struct DynamicBody : public Component<DynamicBody, 1024> {
         DynamicsIds dynamics_ids {};
 };
 
-struct Camera : public Component<Camera> {
-        static const uint32_t MAX_COMPONENT_DATA {8};
+struct Camera : public Component<Camera, 8> {
         glm::vec3 front {0.0f, 0.0f, -1.0f};
         glm::vec3 front_fps {0.0f, 0.0f, -1.0f};
         glm::vec3 up {0.0f, 1.0f, 0.0f};
@@ -67,8 +60,7 @@ struct Camera : public Component<Camera> {
         uint32_t freefly {0};
 };
 
-struct Ball : public Component<Ball> {
-        static const uint32_t MAX_COMPONENT_DATA {32};
+struct Ball : public Component<Ball, 32> {
         float radius {0.1f};
         VertexId position_id {0};
 };

@@ -32,31 +32,31 @@ int make_signature(std::initializer_list<T> list)
         return sum;
 }
 
-template <typename Derived>
+template <typename Derived, int Size>
 struct Component {
         static ComponentId id;
         static uint32_t top; // stack top
         static const uint32_t MAX_COMPONENT_DATA;
-        static Derived data[];
+        static Derived data[Size];
 };
 
 // global component id counter
 extern uint32_t component_id;
 
 // assign family/type id on template resolve
-template <typename Derived>
-ComponentId Component<Derived>::id {component_id++};
+template <typename Derived, int Size>
+ComponentId Component<Derived, Size>::id {component_id++};
 
-template <typename Derived>
-uint32_t Component<Derived>::top = 0;
-
-// component array init
-template <typename Derived>
-const uint32_t Component<Derived>::MAX_COMPONENT_DATA = 1; // intentionally
+template <typename Derived, int Size>
+uint32_t Component<Derived, Size>::top = 0;
 
 // component array init
-template <typename Derived>
-Derived Component<Derived>::data[Derived::MAX_COMPONENT_DATA];
+template <typename Derived, int Size>
+const uint32_t Component<Derived, Size>::MAX_COMPONENT_DATA = Size;
+
+// component array init
+template <typename Derived, int Size>
+Derived Component<Derived, Size>::data[Size];
 
 
 struct EntityData {
