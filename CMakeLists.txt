@@ -1,12 +1,22 @@
 cmake_minimum_required(VERSION 2.8)
 project(flatcloth)
 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -std=c++14 -Wall -Wextra -pedantic -Weffc++ -O0 -ggdb -fdiagnostics-color=always -fno-omit-frame-pointer -fno-inline -fsanitize=address")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -O2 -fno-rtti")
+set(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Weffc++ -pedantic -O0 -ggdb \
+                                                    -fdiagnostics-color=always \
+                                                    -fno-omit-frame-pointer \
+                                                    -fno-inline \
+                                                    ")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -fno-rtti -fno-exceptions")
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${PROJECT_SOURCE_DIR}/cmake")
 
-find_package(OpenGL)
-find_package(SDL2)
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIR})
+message("Including OpenGL: " ${OPENGL_INCLUDE_DIR})
+
+find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR})
 
 file(GLOB_RECURSE SOURCES ./src/*.cc)
