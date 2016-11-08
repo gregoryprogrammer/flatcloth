@@ -10,7 +10,7 @@
 
 void SkyboxSystem::init()
 {
-    log_info("SkyboxSystem", "init entities: %u", m_entities.size());
+    log_info("init entities: %u", m_entities.size());
     for (auto &entity : m_entities) {
         auto skybox = get_component<Skybox>(entity);
 

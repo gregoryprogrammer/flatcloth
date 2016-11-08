@@ -18,7 +18,7 @@ void shader_program_print_log(GLuint sprogram)
 
 GLuint compile_shader(const std::string &filename, const GLenum &type)
 {
-    log_info("ShaderCompile", "loading from file: %s", filename.c_str());
+    log_info("loading from file: %s", filename.c_str());
 
     std::ifstream file(filename);
     std::string content((std::istreambuf_iterator<char>(file)),
@@ -27,7 +27,7 @@ GLuint compile_shader(const std::string &filename, const GLenum &type)
     GLuint shader = glCreateShader(type);
     const char *data = content.c_str();
 
-    log_debug("ShaderCompile", "compiling: %s", filename.c_str());
+    log_debug("compiling: %s", filename.c_str());
     glShaderSource(shader, 1, &data, NULL);
     glCompileShader(shader);
 
@@ -37,7 +37,7 @@ GLuint compile_shader(const std::string &filename, const GLenum &type)
     log[logsize] = '\0';
 
     if (strcmp(log, "") != 0) {
-        log_error("ShaderCompile", "%s", log);
+        log_error("%s", log);
         exit(1);
     }
     return shader;

@@ -11,7 +11,7 @@
 
 void RenderSystem::init()
 {
-    log_info("RenderSystem", "init entities: %u", m_entities.size());
+    log_info("init entities: %u", m_entities.size());
     for (auto &entity : m_entities) {
 
         auto mesh = get_component<Mesh>(entity);

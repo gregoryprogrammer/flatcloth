@@ -4,6 +4,7 @@
 #include "fc_types.h"
 
 #include <cstdio>
+#include <cstring>
 #include <string>
 #include <vector>
 #include <sstream>
@@ -16,17 +17,24 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-#define FCLOG_INFO 0
-#define FCLOG_DEBUG 1
-#define FCLOG_WARNING 2
-#define FCLOG_ERROR 3
+#define LOGFORMAT "%-16s  %-26s : %-24s  >  "
 
-void fclog(uint32_t level, const char *module, const char *fmt, ...);
+// extract relative path filename
+#define __LOCALFILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
-#define log_info(module, ...)    fclog(FCLOG_INFO, module, __VA_ARGS__);
-#define log_debug(module, ...)   fclog(FCLOG_DEBUG, module, __VA_ARGS__);
-#define log_warning(module, ...) fclog(FCLOG_WARNING, module, __VA_ARGS__);
-#define log_error(module, ...)   fclog(FCLOG_ERROR, module, __VA_ARGS__);
+enum class LogLevel {
+    INFO,
+    DEBUG,
+    WARNING,
+    ERROR,
+};
+
+void fclog(LogLevel level, const char *filename, const char *function, const char *fmt, ...);
+
+#define log_info(...)    do { fclog(LogLevel::INFO,    __LOCALFILENAME__, __FUNCTION__, __VA_ARGS__); } while (0)
+#define log_debug(...)   do { fclog(LogLevel::DEBUG,   __LOCALFILENAME__, __FUNCTION__, __VA_ARGS__); } while (0)
+#define log_warning(...) do { fclog(LogLevel::WARNING, __LOCALFILENAME__, __FUNCTION__, __VA_ARGS__); } while (0)
+#define log_error(...)   do { fclog(LogLevel::ERROR,   __LOCALFILENAME__, __FUNCTION__, __VA_ARGS__); } while (0)
 
 std::vector<std::string> split(const std::string &str, char delim);
 

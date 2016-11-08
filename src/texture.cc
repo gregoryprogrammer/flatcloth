@@ -22,7 +22,7 @@ static Texture load_texture(const std::string &filename)
     image = stbi_load(filename.c_str(), &w, &h, &comp, STBI_rgb_alpha);
 
     if (image == nullptr) {
-        log_error("Texture", "null image: %s", filename.c_str());
+        log_error("null image: %s", filename.c_str());
         exit(1);
     }
 
@@ -36,7 +36,7 @@ static Texture load_texture(const std::string &filename)
              (GLvoid *) image);
     stbi_image_free(image);
 
-    log_info("Texture", "loaded: %s, id: %d", filename.c_str(), texture_id);
+    log_info("loaded: %s, id: %d", filename.c_str(), texture_id);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     auto texture = Texture {texture_id, w, h};
@@ -56,14 +56,14 @@ static Texture load_cube_texture(std::vector<std::string> faces)
         unsigned char *image = stbi_load(faces[i].c_str(), &w, &h, &comp, STBI_rgb);
 
         if (image == nullptr) {
-            log_error("Texture", "null image: %s", faces[i].c_str());
+            log_error("null image: %s", faces[i].c_str());
             exit(1);
         }
 
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         stbi_image_free(image);
     }
-    log_info("Texture", "cubetex loaded id: %d", texture_id);
+    log_info("cubetex loaded id: %d", texture_id);
 
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

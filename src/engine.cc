@@ -38,7 +38,7 @@ void Engine::init()
     uint32_t window_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
 
     if (SDL_Init(init_flags) != 0) {
-        log_error("Engine", "cannot initialize sdl: %s", SDL_GetError());
+        log_error("cannot initialize sdl: %s", SDL_GetError());
         exit(1);
     }
     SDL_GL_LoadLibrary(NULL);
@@ -46,7 +46,7 @@ void Engine::init()
     m_window = SDL_CreateWindow("flatcloth", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, settings.width,
                     settings.height, window_flags);
     if (m_window == nullptr) {
-        log_error("Engine", "cannot create window: %s", SDL_GetError());
+        log_error("cannot create window: %s", SDL_GetError());
         exit(1);
     }
 
@@ -66,23 +66,23 @@ void Engine::init()
 
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) {
-        log_error("Engine", "cannot initialize GLEW");
+        log_error("cannot initialize GLEW");
         exit(1);
     }
 
     if (!GLEW_VERSION_3_2) {
-        log_error("Engine", "OpenGL 3.2 API is not available");
+        log_error("OpenGL 3.2 API is not available");
         exit(1);
     }
 
-    log_info("Engine", "GL_VERSION: %s", glGetString(GL_VERSION));
-    log_info("Engine", "GL_RENDERER: %s", glGetString(GL_RENDERER));
-    log_info("Engine", "GL_VENDOR: %s", glGetString(GL_VENDOR));
-    log_info("Engine", "GL_SHADING_LANGUAGE_VERSION: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+    log_info("GL_VERSION: %s", glGetString(GL_VERSION));
+    log_info("GL_RENDERER: %s", glGetString(GL_RENDERER));
+    log_info("GL_VENDOR: %s", glGetString(GL_VENDOR));
+    log_info("GL_SHADING_LANGUAGE_VERSION: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
     GLint max_vertex_attribs;
     glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &max_vertex_attribs);
-    log_info("Engine", "maximum nr of vertex attributes supported: %d", max_vertex_attribs);
+    log_info("maximum nr of vertex attributes supported: %d", max_vertex_attribs);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -145,7 +145,7 @@ void Engine::cleanup()
     SDL_GL_DeleteContext(m_glcontext);
     SDL_DestroyWindow(m_window);
     SDL_Quit();
-    log_info("Engine", "bye bye");
+    log_info("bye bye");
 }
 
 int Engine::poll_events()
@@ -190,31 +190,31 @@ int Engine::poll_events()
             switch (event.window.event) {
 
             case SDL_WINDOWEVENT_SHOWN:
-                log_debug("Window", "%d: shown", event.window.windowID);
+                log_debug("window %d: shown", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_HIDDEN:
-                log_debug("Window", "%d: hidden", event.window.windowID);
+                log_debug("window %d: hidden", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_EXPOSED:
-                log_debug("Window", "%d: exposed", event.window.windowID);
+                log_debug("window %d: exposed", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_RESTORED:
-                log_debug("Window", "%d: restored", event.window.windowID);
+                log_debug("window %d: restored", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_MINIMIZED:
-                log_debug("Window", "%d: minimized", event.window.windowID);
+                log_debug("window %d: minimized", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_MAXIMIZED:
-                log_debug("Window", "%d: maximized", event.window.windowID);
+                log_debug("window %d: maximized", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_MOVED:
-                log_debug("Window", "%d: moved to %d, %d", event.window.windowID,
+                log_debug("window %d: moved to %d, %d", event.window.windowID,
                     event.window.data1, event.window.data2);
                 break;
 
@@ -222,31 +222,31 @@ int Engine::poll_events()
                 settings.width = event.window.data1;
                 settings.height = event.window.data2;
                 viewport(settings.width, settings.height, settings.ratio);
-                log_debug("Window", "%d: resized to %d, %d", event.window.windowID,
+                log_debug("window %d: resized to %d, %d", event.window.windowID,
                     settings.width, settings.height);
                 break;
 
             case SDL_WINDOWEVENT_LEAVE:  // mouse leave window
-                log_debug("Window", "%d: mouse left", event.window.windowID);
+                log_debug("window %d: mouse left", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_ENTER:  // mouse entered window
-                log_debug("Window", "%d: mouse entered", event.window.windowID);
+                log_debug("window %d: mouse entered", event.window.windowID);
                 break;
 
             case SDL_WINDOWEVENT_FOCUS_GAINED:
-                log_debug("Window", "%d: focus gained", event.window.windowID);
+                log_debug("window %d: focus gained", event.window.windowID);
                 settings.focus = 1;
                 SDL_SetRelativeMouseMode(SDL_TRUE);
                 break;
 
             case SDL_WINDOWEVENT_FOCUS_LOST:
-                log_debug("Window", "%d: focus lost", event.window.windowID);
+                log_debug("window %d: focus lost", event.window.windowID);
                 settings.focus = 0;
                 break;
 
             case SDL_WINDOWEVENT_CLOSE:
-                log_debug("Window", "%d: closed", event.window.windowID);
+                log_debug("window %d: closed", event.window.windowID);
                 break;
 
             default:

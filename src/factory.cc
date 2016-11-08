@@ -410,7 +410,7 @@ Entity FACTORY_create_sprite2D(World *world, const std::string &pic)
 {
     auto texture = get_texture(pic);
 
-    log_info("createsprite", "tex w = %d", texture.w);
+    log_info("tex w = %d", texture.w);
 
     auto xw = (float)texture.w * (settings.ratio_w / settings.width);
     auto xh = (float)texture.h * (settings.ratio_h / settings.height);

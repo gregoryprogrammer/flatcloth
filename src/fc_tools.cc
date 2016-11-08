@@ -8,9 +8,7 @@
 #include <sstream>
 #include <cstdarg>
 
-#define LOGFORMAT "%s  %-16s  > "
-
-void fclog(uint32_t level, const char *module, const char *fmt, ...)
+void fclog(LogLevel level, const char *filename, const char *function, const char *fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
@@ -22,18 +20,26 @@ void fclog(uint32_t level, const char *module, const char *fmt, ...)
     timeinfo = localtime(&rawtime);
     strftime(timestamp, 64, "%Y-%m-%d %H:%M:%S", timeinfo);
 
+    switch (level) {
+        case LogLevel::INFO:
+            fprintf(stderr, ANSI_COLOR_GREEN);
+            fprintf(stderr, "INFO    " LOGFORMAT, timestamp, filename, function);
+            break;
 
-    if (level == 0 ) {
-        fprintf(stderr, "INFO    " LOGFORMAT, timestamp, module);
-    } else if (level == 1 ) {
-        fprintf(stderr, ANSI_COLOR_BLUE);
-        fprintf(stderr, "DEBUG   " LOGFORMAT, timestamp, module);
-    } else if (level == 2 ) {
-        fprintf(stderr, ANSI_COLOR_YELLOW);
-        fprintf(stderr, "WARNING " LOGFORMAT, timestamp, module);
-    } else if (level == 3 ) {
-        fprintf(stderr, ANSI_COLOR_RED);
-        fprintf(stderr, "ERROR   " LOGFORMAT, timestamp, module);
+        case LogLevel::DEBUG:
+            fprintf(stderr, ANSI_COLOR_BLUE);
+            fprintf(stderr, "DEBUG   " LOGFORMAT, timestamp, filename, function);
+            break;
+
+        case LogLevel::WARNING:
+            fprintf(stderr, ANSI_COLOR_YELLOW);
+            fprintf(stderr, "WARNING " LOGFORMAT, timestamp, filename, function);
+            break;
+
+        case LogLevel::ERROR:
+            fprintf(stderr, ANSI_COLOR_RED);
+            fprintf(stderr, "ERROR   " LOGFORMAT, timestamp, filename, function);
+            break;
     }
 
     vfprintf(stderr, fmt, args);
