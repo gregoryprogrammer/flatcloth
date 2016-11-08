@@ -15,10 +15,10 @@ constexpr auto ROLL_MAX = 360.0f;
 class CameraSystem : public System
 {
 public:
-        void init();
-        void update_camera_vectors();
-        void temporary_steering(float dt);
-        void mouse_movement(int dx, int dy);
+    void init();
+    void update_camera_vectors();
+    void temporary_steering(float dt);
+    void mouse_movement(int dx, int dy);
 };
 
 #endif // FLATCLOTH_CAMERA_SYSTEM_H

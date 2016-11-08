@@ -9,8 +9,8 @@
 class SkyboxSystem : public System
 {
 public:
-        void init();
-        void render(std::unique_ptr<Shader> const &shader);
+    void init();
+    void render(std::unique_ptr<Shader> const &shader);
 };
 
 #endif // FLATCLOTH_SKYBOX_SYSTEM_H

@@ -9,9 +9,9 @@
 class RenderSystem : public System
 {
 public:
-        void init();
-        void update_vbo();
-        void draw(std::unique_ptr<Shader> const &shader);
+    void init();
+    void update_vbo();
+    void draw(std::unique_ptr<Shader> const &shader);
 };
 
 #endif // FLATCLOTH_RENDER_SYSTEM_H

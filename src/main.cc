@@ -2,6 +2,6 @@
 
 int main()
 {
-        Engine().loop();
-        return 0;
+    Engine().loop();
+    return 0;
 }

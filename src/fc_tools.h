@@ -37,10 +37,10 @@ Quad make_quad(FaceVertex fv0, FaceVertex fv1, FaceVertex fv2, FaceVertex fv3);
 template<class T>
 T number_cast(const std::string &str)
 {
-        std::istringstream iss{str};
-        T number;
-        iss >> number;
-        return number;
+    std::istringstream iss{str};
+    T number;
+    iss >> number;
+    return number;
 }
 
 #endif // FLATCLOTH_FC_TOOLS_H
