@@ -5,15 +5,15 @@
 
 // layout (location = POSITION) in vec3 a_position;
 // layout (location = TEXCOORD) in vec2 a_texcoord;
-attribute vec3 a_position;
-attribute vec2 a_texcoord;
+in vec3 a_position;
+in vec2 a_texcoord;
 
 uniform mat4 u_model;
 uniform mat4 u_view;
 uniform mat4 u_projection;
 
 // out vec2 v_texcoord;
-varying vec2 v_texcoord;
+out vec2 v_texcoord;
 
 void main()
 {

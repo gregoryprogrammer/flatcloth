@@ -1,10 +1,12 @@
 #version 130
 
 // in vec2 v_texcoord;
-varying vec2 v_texcoord;
+in vec2 v_texcoord;
 
 uniform sampler2D u_texture_diffuse_0;
 uniform vec4 u_color;
+
+out vec4 output;
 
 void main()
 {
@@ -15,5 +17,5 @@ void main()
                 discard;
         }
 
-        gl_FragColor = diffuse;
+        output = diffuse;
 }

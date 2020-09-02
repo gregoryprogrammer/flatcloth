@@ -3,10 +3,10 @@
 /*#define POSITION 0*/
 /*layout (location = POSITION) in vec3 a_position;*/
 
-attribute vec3 a_position;
+in vec3 a_position;
 
 //out vec3 v_texcoord;
-varying vec3 v_texcoord;
+out vec3 v_texcoord;
 
 uniform mat4 u_view;
 uniform mat4 u_projection;
